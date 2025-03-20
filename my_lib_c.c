@@ -116,8 +116,6 @@ int ft_base_pos(char nb, char *base)
 
 int ft_atoi_base(char *nbr, char *base)
 {
-    int base_len;
-    int pos;
     int sign;
     int re;
     int i;
@@ -135,13 +133,11 @@ int ft_atoi_base(char *nbr, char *base)
             sign = -sign;
         i++;
     }
-    base_len = ft_strlen(base);
     while (nbr[i])
     {
-        pos = ft_base_pos(nbr[i], base);
         if (pos == -1)
             return (0);
-        re = re * base_len + pos;
+        re = re * ft_strlen(base) + ft_base_pos(nbr[i], base);
         i++;
     }
     return (re * sign);
@@ -552,4 +548,199 @@ void    *ft_print_memory(void *addr, unsigned int size)
         i += 16;
     }
     return (addr);
+}
+
+int     ft_strcmp(char *s1, char *s2)
+{
+    int i;
+
+    i = 0;
+    while (s1[i] && s1[i] == s2[i])
+        i++;
+    return (s1[i] - s2[i]);
+}
+
+int     ft_strncmp(char *s1, char *s2, unsigned int n)
+{
+    int i;
+
+    i = 0;
+    while (s1[i] && s1[i] == s2[i] && i < n)
+        i++;
+    return (s1[i] - s2[i]);
+}
+
+char    *ft_strcat(char *dest, char *src)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (dest[i])
+        i++;
+    j = 0;
+    while (src[j])
+    {
+        dest[i] = src[j];
+        i++;
+        j++;
+    }
+    dest[i] = 0;
+    return (dest);
+}
+
+char    *ft_strncat(char *dest, char *src, unsigned int nb)
+{
+    unsigned int i;
+    unsigned int j;
+
+    i = 0;
+    while (dest[i])
+        i++;
+    j = 0;
+    while (src[j] && j < nb)
+    {
+        dest[i] = src[j];
+        i++;
+        j++;
+    }
+    dest[i] = 0;
+    return (dest);
+}
+
+char    *ft_strstr(char *str, char *to_find)
+{
+    int i;
+    int j;
+
+    if (!str || !to_find)
+        return (NULL);
+    else if (!*to_find)
+        return (str);
+    i = 0;
+    while (str[i])
+    {
+        j = 0;
+        while (str[i + j] == to_find[j] && to_find[j])
+            j++;
+        if (!to_find[j])
+            return (str + i);
+        i++;
+    }
+    return (NULL);
+}
+
+unsigned int    ft_strlcat(char *dest, char *src, unsigned int size)
+{
+    unsigned int    i;
+    unsigned int    dest_len;
+    unsigned int    src_len;
+
+    if (!dest || !src)
+        return (0);
+    dest_len = 0;
+    while (dest_len < size && dest[dest_len])
+        dest_len++;
+    src_len = (unsigned int)ft_strlen(src);
+    if (size <= dest_len)
+        return (size + src_len);
+    i = 0;
+    while (src[i] && (dest_len + i) < (size - 1))
+    {
+        dest[dest_len + i] = src[i];
+        i++;
+    }
+    dest[dest_len + i] = 0;
+    return (dest_len + src_len);
+}
+
+int     ft_iterative_factorial(int nb)
+{
+    int i;
+    int re;
+
+    if (nb == 0)
+        return (1);
+    else if (nb < 0)
+        return (0);
+    i = nb;
+    re = 1;
+    while (i > 1)
+    {
+        re *= i;
+        i--;
+    }
+    return (re);
+}
+
+int     ft_recursive_factorial(int nb)
+{
+    if (nb == 0)
+        return (1);
+    else if (nb < 0)
+        return (0);
+    return (nb * ft_recursive_factorial(nb - 1));
+}
+
+int     ft_iterative_power(int nb, int power)
+{
+    int re;
+    int i;
+
+    if (power < 0)
+        return (0);
+    else if (power == 0)
+        return (1);
+    i = 0;
+    re = 1;
+    while (i < power)
+    {
+        re *= nb;
+        i++;
+    }
+    return (re);
+}
+
+int     ft_recursive_power(int nb, int power)
+{
+    if (power < 0)
+        return (0);
+    else if (power == 0)
+        return (1);
+    return (nb * ft_recursive_power(nb, power - 1));
+}
+
+int     ft_fibonacci(int index)
+{
+    if (index < 0)
+        return (-1);
+    else if (index == 0 || index == 1)
+        return (index);
+    return (ft_fibonacci(index - 1) + ft_fibonacci(index - 2));
+}
+
+int     ft_sqrt(int nb)
+{
+    int guess;
+    int next_guess;
+
+    if (nb < 0)
+        return (0);
+    else if (nb == 0 || nb == 1)
+        return (nb);
+    guess = (nb / 2) + 1;
+    next_guess = (guess + (nb / guess)) / 2;
+    while (guess != next_guess)
+    {
+        guess = next_guess;
+        next_guess = (guess + (nb / guess)) / 2;
+    }
+    if (next_guess * next_guess == nb)
+        return (next_guess);
+    return (0);
+}
+
+int ft_is_prime(int nb)
+{
+    return ();
 }
