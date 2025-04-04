@@ -1,5 +1,7 @@
 #include "my_header.h"
 
+#define ATOI_BASE_ERROR INT_MIN
+
 int ft_atoi(char *str)
 {
     int i;
@@ -61,33 +63,38 @@ void    ft_putnbr(int nbr)
     }
 }
 
-int ft_base_checker(char *base)
+bool    ft_incorrect_base(char *base)
 {
     int i;
     int j;
+    int base_len;
 
-    if (ft_strlen(base) < 2)
-        return (1);
+    base_len = ft_strlen(base);
+    if (base_len < 2)
+        return (true);
     i = 0;
     while (base[i])
     {
+        if (base[i] == '+' || base[i] == '-' || base[i] == ' '
+            || (base[i] >= 9 && base[i] <= 13))
+            return (true);
         j = i + 1;
         while (base[j])
         {
-            if (base[i] == base[j] || base[i] == '-' || base[i] == '+')
-                return (1);
+            if (base[i] == base[j])
+                return (true);
             j++;
         }
         i++;
     }
-    return (0);
+    return (false);
 }
 
 void    ft_putnbr_base(int nbr, char *base)
 {
     int base_len;
 
-    if (ft_base_checker(base) == 1)
+    if (ft_incorrect_base(base))
         return ;
     base_len = ft_strlen(base);
     if (nbr < 0)
@@ -110,8 +117,41 @@ int ft_base_pos(char nb, char *base)
     {
         if (nb == base[pos])
             return (pos);
+        pos++;
     }
     return (-1);
+}
+
+bool    ft_valid_number(char *nbr, char *base)
+{
+    int i;
+    
+    i = 0;
+    while (nbr[i] == ' ' || (nbr[i] >= 9 && nbr[i] <= 13))
+        i++;
+    while (nbr[i] == '-' || nbr[i] == '+')
+        i++;
+    if (!nbr[i])
+        return (false);
+    while (nbr[i])
+    {
+        if (ft_base_pos(nbr[i], base) == -1)
+            return (false);
+        i++;
+    }
+    return (true);
+}
+
+void    ft_skipper(char *nbr, int *i, int *sign)
+{
+    while (nbr[*i] == ' ' || (nbr[*i] >= 9 && nbr[*i] <= 13))
+        (*i)++;
+    while (nbr[*i] == '-' || nbr[*i] == '+')
+    {
+        if (nbr[*i] == '-')
+            *sign = -*sign;
+        (*i)++;
+    }
 }
 
 int ft_atoi_base(char *nbr, char *base)
@@ -119,25 +159,20 @@ int ft_atoi_base(char *nbr, char *base)
     int sign;
     int re;
     int i;
+    int pos;
+    int base_len;
 
-    if (ft_base_checker(base) == 1)
-        return (0);
+    if (ft_incorrect_base(base) || !ft_valid_number(nbr, base))
+        return (ATOI_BASE_ERROR);
     i = 0;
     re = 0;
     sign = 1;
-    while (nbr[i] == ' ' || (nbr[i] >= 9 && nbr[i] <= 13))
-        i++;
-    while (nbr[i] == '-' || nbr[i] == '+')
-    {
-        if (nbr[i] == '-')
-            sign = -sign;
-        i++;
-    }
+    ft_skipper(nbr, &i, &sign);
+    base_len = ft_strlen(base);
     while (nbr[i])
     {
-        if (pos == -1)
-            return (0);
-        re = re * ft_strlen(base) + ft_base_pos(nbr[i], base);
+        pos = ft_base_pos(nbr[i], base);
+        re = re * base_len + pos;
         i++;
     }
     return (re * sign);
@@ -886,7 +921,7 @@ char    *ft_strdup(char *src)
     if (!src)
         return (NULL);
     src_len = ft_strlen(src);
-    dup = (char *)malloc(sizeof(char) * (len + 1));
+    dup = (char *)malloc(sizeof(char) * (src_len + 1));
     if (!dup)
         return (NULL);
     i = 0;
@@ -991,4 +1026,129 @@ char    *ft_strjoin(int size, char **strs, char *sep)
         return (NULL);
     ft_strjoin_aux(str, strs, size, sep);
     return (str);
+}
+
+int ft_itoa_len(int nb, int base_len)
+{
+    int     len;
+    long    temp;
+
+    len = 0;
+    temp = (long)nb;
+    if (nb < 0)
+    {
+        len++;
+        temp = -(long)nb;
+    }
+    while (temp)
+    {
+        temp /= base_len;
+        len++;
+    }
+    return (len);
+}
+
+char    *ft_strdup_char(char c)
+{
+    char    *dup;
+
+    dup = (char *)malloc(sizeof(char) * 2);
+    if (!dup)
+        return (NULL);
+    dup[0] = c;
+    dup[1] = 0;
+    return (dup);
+}
+
+char    *ft_itoa_base(int nb, char *base)
+{
+    int     base_len;
+    int     len;
+    long    n;
+    char    *nbr;
+
+    if (ft_incorrect_base(base))
+        return (NULL);
+    base_len = ft_strlen(base);
+    if (nb == 0)
+        return (ft_strdup_char(base[0]));
+    len = ft_itoa_len(nb, base_len);
+    nbr = (char *)malloc(sizeof(char) * (len + 1));
+    if (!nbr)
+        return (NULL);
+    nbr[len] = 0;
+    n = (nb < 0) ? -(long)nb : (long)nb;
+    while (n)
+    {
+        nbr[--len] = base[n % base_len];
+        n /= base_len;
+    }
+    if (nb < 0)
+        nbr[0] = '-';
+    return (nbr);
+}
+
+char    *ft_itoa(int nb)
+{
+    return (ft_itoa_base(nb, "0123456789"));
+}
+
+char    *ft_convert_base(char *nbr, char *base_from, char *base_to)
+{
+    int     nb;
+
+    nb = ft_atoi_base(nbr, base_from);
+    return (ft_itoa_base(nb, base_to));
+}
+
+char    **ft_strdup_matrix()
+{
+    char    **dup;
+
+    dup = (char **)malloc(sizeof(char *) * 1);
+    if (!dup)
+        return (NULL);
+    dup[0] = NULL;
+    return (dup);
+}
+
+int ft_split_len(char *str, char *charset)
+{
+    int len;
+    int i;
+    int j;
+
+    len = 1;
+    i = 1;
+    while (str[i])
+    {
+        j = 0;
+        while (charset[j])
+        {
+            if (str[i] == charset[j] && str[i] != charset[j])
+            {
+                len++;
+                break ;
+            }
+            j++;
+        }
+        i++;
+    }
+    return (len);
+}
+
+char    **ft_split(char *str, char *charset)
+{
+    char    **split;
+    int     len;
+    int     str_len;
+
+    str_len = ft_strlen(str);
+    if (str_len == 0)
+        return (ft_strdup_matrix());
+    if (!str || !charset)
+        return (NULL);
+    len = ft_split_len(str, charset);
+    split = (char **)malloc(sizeof(char *) * (len + 1))
+    return (split);
 }

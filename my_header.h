@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdbool.h>
+#include <limits.h>
 
 unsigned int    ft_strlcpy(char *dest, char *src, unsigned int size);
 void            ft_putchar(char c);
@@ -39,7 +40,9 @@ char            *ft_strupcase(char *str);
 char            *ft_strlowcase(char *str);
 char            *ft_strdup(char *src);
 char            *ft_strjoin(int size, char **strs, char *sep);
-bool            ft_safe_cell(int *board, int col, int row);
+char            *ft_itoa_base(int nb, char *base);
+char            *ft_itoa(int nb);
+char            *ft_convert_base(char *nbr, char *base_from, char *base_to);
 int             ft_atoi(char *str);
 int             ft_strlen(char *str);
 int             ft_base_checker(char *base);
@@ -61,5 +64,7 @@ int             ft_is_prime(int nb);
 int             ft_find_next_prime(int nb);
 int             *ft_range(int min, int max);
 int             ft_ultimate_range(int **range, int min, int max);
+int             ft_itoa_len(int nb, int base_len);
+bool            ft_safe_cell(int *board, int col, int row);
 
 #endif
