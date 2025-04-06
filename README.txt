@@ -9,22 +9,27 @@ Este método hace que cualquier programa pueda usar #include "my_lib.h" sin move
 1️⃣ Crear estructura de instalación
 mkdir -p $HOME/.local/include   # Para headers (.h)
 mkdir -p $HOME/.local/lib       # Para librerías (.a y .so)
+
 2️⃣ Copiar los archivos
-cp my_lib.h $HOME/.local/include/
-gcc -shared -o $HOME/.local/lib/libmy_lib.so -fPIC my_lib.c
+cp <my_lib.h> $HOME/.local/include/
+gcc -shared -o $HOME/.local/lib/<my_lib.so> -fPIC <my_lib.c>
+
 3️⃣ Configurar variables de entorno
 Añade estas líneas a tu ~/.bashrc o ~/.zshrc para que sean permanentes:
 
 export C_INCLUDE_PATH=$HOME/.local/include:$C_INCLUDE_PATH
 export LIBRARY_PATH=$HOME/.local/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+
+
 Después, aplica los cambios:
 
-source ~/.bashrc  # O source ~/.zshrc si usas zsh
+source ~/.bashrc      # O "source ~/.zshrc" si usas zsh
+
 🚀 Usarlo en cualquier proyecto
 Ahora, cuando compiles cualquier programa, simplemente haz:
 
-gcc -o my_program main.c -lmy_lib
+gcc -o <my_program> main.c -l<my_lib>
 🔹 Sin necesidad de -I ni -L, porque el compilador ya sabe dónde buscar.
 🔹 Funciona para cualquier proyecto sin copiar archivos.
 
@@ -34,7 +39,7 @@ gcc -o my_program main.c -lmy_lib
 ✅ Persistente, incluso tras reiniciar
 ✅ Compatible con librerías estáticas (.a) y dinámicas (.so)
 
-💡 Ahora puedes usar my_lib.h y libmy_lib.so globalmente sin complicaciones. 🚀
+💡 Ahora puedes usar <my_lib.h> y <my_lib.so> globalmente sin complicaciones. 🚀
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -47,11 +52,11 @@ Este directorio debe contener solo los headers (.h) de tu librería.
 
 📌 Pasos:
 
-cp my_lib.h $HOME/.local/include/
-📌 Ejemplo de my_lib.h:
+cp <my_lib.h> $HOME/.local/include/
+📌 Ejemplo de libft.h:
 
-#ifndef MY_LIB_H
-#define MY_LIB_H
+#ifndef LIBFT_H
+#define LIBFT_H
 
 #include <unistd.h>
 #include <stdio.h>
@@ -74,13 +79,14 @@ void ft_swap(int *a, int *b);
 Aquí deben estar las compilaciones de la librería en forma de archivo estático (.a) o dinámico (.so).
 
 📌 Opción 1: Librería Estática (.a)
-gcc -c my_lib.c -o my_lib.o
-ar rcs $HOME/.local/lib/libmy_lib.a my_lib.o
-Esto crea libmy_lib.a, que se enlaza en la compilación.
+gcc -c <my_lib.c> -o <my_lib.o>
+ar rcs $HOME/.local/lib/<my_lib.a> <my_lib.o>
+Esto crea <my_lib.a>, que se enlaza en la compilación.
+
 
 📌 Opción 2: Librería Dinámica (.so)
-gcc -shared -o $HOME/.local/lib/libmy_lib.so -fPIC my_lib.c
-Esto crea libmy_lib.so, que se carga en tiempo de ejecución.
+gcc -shared -o $HOME/.local/lib/<my_lib.so> -fPIC <my_lib.c>
+Esto crea <my_lib.so>, que se carga en tiempo de ejecución.
 
 📌 Configuración Final
 Para que el compilador encuentre la librería automáticamente, asegúrate de tener estas variables en ~/.bashrc o ~/.zshrc:
@@ -88,16 +94,17 @@ Para que el compilador encuentre la librería automáticamente, asegúrate de te
 export C_INCLUDE_PATH=$HOME/.local/include:$C_INCLUDE_PATH
 export LIBRARY_PATH=$HOME/.local/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+
 Y aplica los cambios:
 
-source ~/.bashrc  # O source ~/.zshrc si usas Zsh
+source ~/.bashrc      # O source ~/.zshrc si usas Zsh
 🚀 Cómo usar la librería en un proyecto
 1️⃣ Enlazar la librería estática (.a):
 
-gcc -o my_program main.c -lmy_lib
+gcc -o <my_program main.c> -l<my_lib>
 2️⃣ Enlazar la librería dinámica (.so):
 
-gcc -o my_program main.c -lmy_lib
+gcc -o <my_program main.c> -l<my_lib>
 (Si da error al ejecutar, recarga LD_LIBRARY_PATH con export LD_LIBRARY_PATH=$HOME/.local/lib).
 
 🔥 Ventajas
@@ -106,4 +113,4 @@ gcc -o my_program main.c -lmy_lib
 ✅ Compatible con cualquier compilación (gcc, clang, etc.)
 ✅ Puedes actualizar la librería sin modificar cada proyecto
 
-Ahora, cualquier código en C podrá incluir #include "my_lib.h" y enlazar con -lmy_lib sin preocuparse por rutas. 🚀
+Ahora, cualquier código en C podrá incluir #include <my_lib.h> y enlazar con -l<my_lib> sin preocuparse por rutas. 🚀
