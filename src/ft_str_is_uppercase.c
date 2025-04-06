@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:24:17 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:24:19 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+int ft_str_is_uppercase(char *str)
 {
-    if (nb == 0)
+    int i;
+    int str_len;
+
+    str_len = ft_strlen(str);
+    if (str_len == 0)
         return (1);
-    else if (nb < 0)
-        return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    i = 0;
+    while (str[i])
+    {
+        if (!(str[i] >= 'A' && str[i] <= 'Z'))
+            return (0);
+        i++;
+    }
+    return (1);
 }

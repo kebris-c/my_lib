@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:37:32 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:37:32 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+int ft_sqrt(int nb)
 {
-    if (nb == 0)
-        return (1);
-    else if (nb < 0)
+    int guess;
+    int next_guess;
+
+    if (nb < 0)
         return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    else if (nb == 0 || nb == 1)
+        return (nb);
+    guess = (nb / 2) + 1;
+    next_guess = (guess + (nb / guess)) / 2;
+    while (guess != next_guess)
+    {
+        guess = next_guess;
+        next_guess = (guess + (nb / guess)) / 2;
+    }
+    if (next_guess * next_guess == nb)
+        return (next_guess);
+    return (0);
 }

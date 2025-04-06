@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:00:25 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:38:28 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:27:08 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:27:09 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_is_prime(int nb)
+char    *ft_strcapitalize(char *str)
 {
     int i;
 
-    if (nb == 2 || nb == 3 || nb == 5)
-        return (1);
-    else if (nb < 2 || nb % 2 == 0 || nb % 3 == 0 || nb % 5 == 0 || (nb % 6 != 1
-        && nb % 6 != 5))
-        return (0);
-    i = 7;
-    while (i * i <= nb)
+    str = ft_strlowcase(str);
+    i = 0;
+    if (str[i] >= 'a' && str[i] <= 'z')
+        str[i] -= 32;
+    i++;
+    while (str[i])
     {
-        if (nb % i == 0 || nb % (i + 2) == 0)
-            return (0);
-        i += 6;
+        if (!((str[i - 1] >= 'a' && str[i - 1] <= 'z')
+            || (str[i - 1] >= 'A' && str[i - 1] <= 'Z')
+            || (str[i - 1] >= '0' && str[i - 1] <= '9'))
+            && (str[i] >= 'a' && str[i] <= 'z'))
+            str[i] -= 32;
+        i++;
     }
-    return (1);
+    return (str);
 }

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_recursive_power.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:36:02 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:36:03 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+int ft_recursive_power(int nb, int power)
 {
-    if (nb == 0)
-        return (1);
-    else if (nb < 0)
+    if (power < 0)
         return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    else if (power == 0)
+        return (1);
+    return (nb * ft_recursive_power(nb, power - 1));
 }

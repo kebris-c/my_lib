@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:31:21 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:31:25 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+char    *ft_strcat(char *dest, char *src)
 {
-    if (nb == 0)
-        return (1);
-    else if (nb < 0)
-        return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    int i;
+    int j;
+
+    i = 0;
+    while (dest[i])
+        i++;
+    j = 0;
+    while (src[j])
+    {
+        dest[i] = src[j];
+        i++;
+        j++;
+    }
+    dest[i] = 0;
+    return (dest);
 }

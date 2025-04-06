@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_ultimate_div_mod.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:14:18 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:19:52 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+void    ft_ultimate_div_mod(int *a, int *b)
 {
-    if (nb == 0)
-        return (1);
-    else if (nb < 0)
-        return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    int div;
+    int mod;
+
+    div = *a / *b;
+    mod = *a % *b;
+    *a= div;
+    *b = mod;
 }

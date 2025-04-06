@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/04/06 16:17:55 by kebris-c          #+#    #+#              #
+#    Updated: 2025/04/06 16:17:57 by kebris-c         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I include
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
-NAME = libft.a
+NAME = Libft.a
 CREATOR_SCRIPT = libft_creator.sh
 CREATOR_FLAG = .creator_done
 

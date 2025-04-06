@@ -1,42 +1,18 @@
-#include "libft.h"
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/06 16:00:13 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:18:58 by kebris-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	ft_itoa_len(int n)
+#include "Libft.h"
+
+char    *ft_itoa(int nb)
 {
-	int len;
-
-	len = (n <= 0) ? 1 : 0;
-	while (n)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*str;
-	int		len;
-	long	num;
-
-	num = n;
-	len = ft_itoa_len(num);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	if (num < 0)
-	{
-		str[0] = '-';
-		num = -num;
-	}
-	while (num > 0)
-	{
-		str[--len] = (num % 10) + '0';
-		num /= 10;
-	}
-	if (n == 0)
-		str[0] = '0';
-	return (str);
+    return (ft_itoa_base(nb, "0123456789"));
 }

@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:44:35 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:46:39 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+char    *ft_strdup(char *src)
 {
-    if (nb == 0)
-        return (1);
-    else if (nb < 0)
-        return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    char    *dup;
+    int     i;
+    int     src_len;
+
+    if (!src)
+        return (NULL);
+    src_len = ft_strlen(src);
+    dup = (char *)malloc(sizeof(char) * (src_len + 1));
+    if (!dup)
+        return (NULL);
+    i = 0;
+    while (src[i])
+    {
+        dup[i] = src[i];
+        i++;
+    }
+    dup[i] = 0;
+    return (dup);
 }

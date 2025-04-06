@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_incorrect_base.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 15:57:43 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:18:36 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:07:58 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:18:44 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_atoi(char *str)
+t_bool    ft_incorrect_base(char *base)
 {
     int i;
-    int sign;
-    int result;
+    int j;
+    int base_len;
 
+    base_len = ft_strlen(base);
+    if (base_len < 2)
+        return (TRUE);
     i = 0;
-    sign = 1;
-    result = 0;
-    while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-        i++;
-    while (str[i] == '-' || str[i] == '+')
+    while (base[i])
     {
-        if (str[i] == '-')
-            sign = -sign;
+        if (base[i] == '+' || base[i] == '-' || base[i] == ' '
+            || (base[i] >= 9 && base[i] <= 13))
+            return (TRUE);
+        j = i + 1;
+        while (base[j])
+        {
+            if (base[i] == base[j])
+                return (TRUE);
+            j++;
+        }
         i++;
     }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-    return (result * sign);
+    return (FALSE);
 }

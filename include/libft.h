@@ -39,7 +39,7 @@ void                ft_print_table(int n, int *board, int *sol_num);
 void                ft_queen_backtracking(int *board, int n, int col, int row, int *sol_num);
 void                ft_n_queens_puzzle(int n);
 void                ft_strjoin_aux(char *str, char ** strs, int size, char *sep);
-void                set_point(t_point *point);
+void                ft_set_point(t_point *point);
 void                ft_show_tab(struct s_stock_str *par);
 char                *ft_strcpy(char *str);
 char                *ft_strncpy(char *str);

@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:00:25 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:38:28 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:32:53 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:32:54 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_is_prime(int nb)
+int ft_strlcat(char *dest, char *src, int size)
 {
     int i;
+    int dest_len;
+    int src_len;
 
-    if (nb == 2 || nb == 3 || nb == 5)
-        return (1);
-    else if (nb < 2 || nb % 2 == 0 || nb % 3 == 0 || nb % 5 == 0 || (nb % 6 != 1
-        && nb % 6 != 5))
+    if (!dest || !src)
         return (0);
-    i = 7;
-    while (i * i <= nb)
+    dest_len = 0;
+    while (dest_len < size && dest[dest_len])
+        dest_len++;
+    src_len = ft_strlen(src);
+    if (size <= dest_len)
+        return (size + src_len);
+    i = 0;
+    while (src[i] && (dest_len + i) < (size - 1))
     {
-        if (nb % i == 0 || nb % (i + 2) == 0)
-            return (0);
-        i += 6;
+        dest[dest_len + i] = src[i];
+        i++;
     }
-    return (1);
+    dest[dest_len + i] = 0;
+    return (dest_len + src_len);
 }

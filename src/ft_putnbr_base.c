@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:01:15 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:34:58 by kebris-c         ###   ########.fr       */
+/*   Created: 2025/04/06 16:08:46 by kebris-c          #+#    #+#             */
+/*   Updated: 2025/04/06 16:19:11 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Libft.h"
 
-int ft_recursive_factorial(int nb)
+void    ft_putnbr_base(int nbr, char *base)
 {
-    if (nb == 0)
-        return (1);
-    else if (nb < 0)
-        return (0);
-    return (nb * ft_recursive_factorial(nb - 1));
+    int base_len;
+
+    if (ft_incorrect_base(base))
+        return ;
+    base_len = ft_strlen(base);
+    if (nbr < 0)
+    {
+        ft_putchar('-');
+        ft_putnbr_base(-nbr, base);
+        return ;
+    }
+    if (nbr > 9)
+        ft_putnbr_base(nbr / base_len, base);
+    ft_putchar(base[nbr % base_len]);
 }
