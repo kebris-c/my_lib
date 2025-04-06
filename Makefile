@@ -16,8 +16,7 @@ NAME = libft
 SRC = $(NAME).c
 STATIC_LIB = $(NAME).a
 SHARED_LIB = $(NAME).so
-HEADER_DIR = $(HOME)/.local/include/
-LIB_DIR = $(HOME)/.local/lib/
+LIB_DIR = $(HOME)/.local/srcs/
 CREATOR_SCRIPT = libft_creator.sh
 CREATOR_FLAG = .creator_done
 

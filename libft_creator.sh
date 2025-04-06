@@ -13,8 +13,8 @@
 #!/bin/bash
 
 LIB_NAME="libft"
-HEADER_DIR="$HOME/.local/include"
-LIB_DIR="$HOME/.local/lib"
+HEADER_DIR="$HOME/.local/includes"
+LIB_DIR="$HOME/.local/srcs"
 
 # Check if libft.c exists in the current directory
 if [ ! -f "$LIB_NAME.c" ]; then
