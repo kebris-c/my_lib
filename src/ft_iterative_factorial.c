@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft.h"
+#include "libft.h"
 
 int ft_iterative_factorial(int nb)
 {

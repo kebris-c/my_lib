@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft.h"
+#include "libft.h"
 
 void    ft_teen_queens_puzzle(void)
 {

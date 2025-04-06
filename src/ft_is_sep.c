@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft.h"
+#include "libft.h"
 
 t_bool    ft_is_sep(char c, char *charset)
 {

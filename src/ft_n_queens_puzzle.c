@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft.h"
+#include "libft.h"
 
 static t_bool     ft_safe_cell(int *board, int col, int row)
 {

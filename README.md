@@ -1,13 +1,13 @@
-# Libft
+# libft
 
-Libft is a C library that implements a series of useful functions for string manipulation, type conversions, and mathematical operations. This library is a fundamental project for those learning C and looking to build a solid foundation in programming.
+libft is a C library that implements a series of useful functions for string manipulation, type conversions, and mathematical operations. This library is a fundamental project for those learning C and looking to build a solid foundation in programming.
 
 ## Project Structure
 
 The project is organized as follows:
 
 ```
-Libft
+libft
 ├── include
 │   ├── ft_abs.h
 │   ├── ft_boolean.h
@@ -59,5 +59,5 @@ Additionally, by running `libft_creator.sh`, you can create your library globall
 Then, you can compile your program linking the library:
 
 ```bash
-gcc -o my_program main.c -lLibft
+gcc -o my_program main.c -llibft
 ```

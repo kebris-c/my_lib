@@ -12,7 +12,7 @@
 
 #!/bin/bash
 
-LIB_NAME="Libft"
+LIB_NAME="libft"
 HEADER_DIR="$HOME/.local/include"
 LIB_DIR="$HOME/.local/lib"
 
@@ -29,7 +29,7 @@ mkdir -p "$LIB_DIR"
 # Copy headers from ~/Desktop/libs/
 if compgen -G "$HOME/Desktop/libs/*.h" > /dev/null; then
     rm -f "$HEADER_DIR"/*.h
-    cp "$HOME/Desktop/libs/"*.h "$HEADER_DIR/"
+    mv "$HOME/Desktop/libs/"*.h "$HEADER_DIR/"
     echo "✅ Header files copied to $HEADER_DIR"
 else
     echo "⚠️  No header files found in $HOME/Desktop/libs/, skipping copy."
@@ -73,4 +73,4 @@ echo "export C_INCLUDE_PATH=\$HOME/.local/include:\$C_INCLUDE_PATH"
 echo "export LIBRARY_PATH=\$HOME/.local/lib:\$LIBRARY_PATH"
 echo "export LD_LIBRARY_PATH=\$HOME/.local/lib:\$LD_LIBRARY_PATH"
 echo -e "\n✅ Perfect! Now you can compile every program without to use "-I" or "-L" with your own library by using:"
-echo "gcc -o <your_program> main.c -l$LIB_NAME"
+echo "gcc -o <your_program> main.c -l($LIB_NAME)"
