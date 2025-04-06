@@ -100,14 +100,13 @@ fclean: clean
 recreate: fclean
 	@echo "Recreating libraries with $(CREATOR_SCRIPT)..."
 	bash $(CREATOR_SCRIPT)
-	$(MAKE) all
 
 re: fclean all
 
 help:
 	@echo "Makefile for creating static and shared libraries."
 	@echo "Usage:"
-	@echo "  make all               - Check and create libraries if needed."
+	@echo "  make all               - Check and create libraries if needed and execute the $(PROJECT)."
 	@echo "  make compile_static    - Create static library manually."
 	@echo "  make compile_shared    - Create shared library manually."
 	@echo "  make clean             - Remove object files."
