@@ -60,7 +60,7 @@ $(PROJECT):
 	@echo "If you want to execcute the project, run './$(PROJECT)' or 'make exec'"
 
 force:
-		@echo "Forcing the compile of the project..."
+	@echo "Forcing the compile of the project..."
 	$(CC) -c $(FTS) -o $(PROJECT)
 	@echo "✅ Project compiled: $(PROJECT)"
 	@echo "If you want to execcute the project, run './$(PROJECT)' or 'make exec'"
