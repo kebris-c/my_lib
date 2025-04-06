@@ -12,6 +12,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+PROJECT = project
 NAME = libft
 SRC = $(NAME).c
 STATIC_LIB = $(NAME).a
@@ -19,8 +20,12 @@ SHARED_LIB = $(NAME).so
 LIB_DIR = $(HOME)/.local/srcs/
 CREATOR_SCRIPT = libft_creator.sh
 CREATOR_FLAG = .creator_done
+NORMINETTE = norminette -CheckForbiddenSourceHeader
+FTS = *.c
 
-all: help_hint check_library
+all: $(NAME) $(PROJECT)
+
+$(NAME): help_hint check_library
 
 help_hint:
 	@echo "Tip: Run 'make help' to see available commands."
@@ -47,6 +52,29 @@ check_library:
 	fi
 	@echo "Library check complete.";
 
+$(PROJECT):
+	@echo "Compiling project..."
+	$(NORMINETTE) $(FTS)
+	$(CC) $(CFLAGS) -c *.c -o $(PROJECT)
+	@echo "✅ Project compiled: $(PROJECT)"
+	@echo "If you want to execcute the project, run './$(PROJECT)' or 'make exec'"
+
+force:
+		@echo "Forcing the compile of the project..."
+	$(CC) -c $(FTS) -o $(PROJECT)
+	@echo "✅ Project compiled: $(PROJECT)"
+	@echo "If you want to execcute the project, run './$(PROJECT)' or 'make exec'"
+
+norm:
+	@echo "Running norminette..."
+	$(NORMINETTE) $(FTS)
+	@echo "✅ Norminette check complete."
+
+exec:
+	@echo "Executing project..."
+	./$(PROJECT)
+	@echo "✅ Project executed."
+
 compile_static:
 	@echo "Creating static library..."
 	$(CC) $(CFLAGS) -c $(SRC)
@@ -67,10 +95,14 @@ fclean: clean
 	@echo "Removing libraries..."
 	rm -f $(LIB_DIR)$(STATIC_LIB) $(LIB_DIR)$(SHARED_LIB)
 	rm -f $(CREATOR_FLAG)
+	rm -f $(PROJECT)
 
 recreate: fclean
 	@echo "Recreating libraries with $(CREATOR_SCRIPT)..."
 	bash $(CREATOR_SCRIPT)
+	$(MAKE) all
+
+re: fclean all
 
 help:
 	@echo "Makefile for creating static and shared libraries."
@@ -79,11 +111,13 @@ help:
 	@echo "  make compile_static    - Create static library manually."
 	@echo "  make compile_shared    - Create shared library manually."
 	@echo "  make clean             - Remove object files."
-	@echo "  make fclean            - Remove libraries and object files."
+	@echo "  make fclean            - Remove libraries, object files, and the compiled project."
 	@echo "  make recreate          - Recreate libraries using $(CREATOR_SCRIPT)."
-	@echo "  make re                - Clean and recreate libraries."
+	@echo "  make re                - Clean and recreate everything."
+	@echo "  make force             - Force the compilation of the project."
+	@echo "  make norm              - Run norminette on the source files."
+	@echo "  make exec              - Execute the compiled project."
 	@echo "  make help              - Display this help message."
 
-re: fclean all
-
-.PHONY: all clean fclean re check_library compile_static compile_shared recreate help help_hint
+.PHONY: all clean fclean re recreate help help_hint check_library \
+compile_static compile_shared force norm exec $(NAME) $(PROJECT)

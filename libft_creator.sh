@@ -30,7 +30,7 @@ mkdir -p "$LIB_DIR"
 if compgen -G "$HOME/Desktop/libs/*.h" > /dev/null; then
     rm -f "$HEADER_DIR"/*.h
     mv "$HOME/Desktop/libs/"*.h "$HEADER_DIR/"
-    echo "✅ Header files copied to $HEADER_DIR"
+    echo "✅ Header files movied to $HEADER_DIR"
 else
     echo "⚠️  No header files found in $HOME/Desktop/libs/, skipping copy."
 fi

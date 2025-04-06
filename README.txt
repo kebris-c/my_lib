@@ -122,9 +122,9 @@ Ahora, cualquier código en C podrá incluir #include "my_lib.h" y enlazar con -
  already been executed.
  The script should be placed in the same directory as this Makefile.
  The script should also handle the creation of the include directory
- and the src directory, and any other necessary setup for the project.
+ and the srcs directory, and any other necessary setup for the project.
  The script should also ensure that the source files are placed in the
- src directory and the header files are placed in the include directory.
+ srcs directory and the header files are placed in the include directory.
  The script should also ensure that the Makefile is placed in the root
  directory of the project.
 							How to use it:

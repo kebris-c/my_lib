@@ -14,7 +14,7 @@ libft
 │   ├── ft_point.h
 │   ├── ft_stock_str.h
 │   └── libft.h
-├── src
+├── srcs
 │   ├── libft.c #all functions unified
 │   ├── ft_atoi.c
 │   ├── ft_strlen.c
