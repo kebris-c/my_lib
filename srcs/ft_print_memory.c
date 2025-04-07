@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void    ft_print_addr(unsigned long addr, char *base)
+static void    ft_print_addr(unsigned long addr, char *base)
 {
     char    *hex;
     char    hex_addr[17];
@@ -30,7 +30,7 @@ void    ft_print_addr(unsigned long addr, char *base)
     ft_putstr(": ");
 }
 
-void    ft_print_memory_content(unsigned char *ptr, int size, char *base)
+static void    ft_print_memory_content(unsigned char *ptr, int size, char *base)
 {
     int	i;
 
@@ -49,7 +49,7 @@ void    ft_print_memory_content(unsigned char *ptr, int size, char *base)
     }
 }
 
-void    ft_print_ascii(unsigned char *ptr, int size)
+static void    ft_print_ascii(unsigned char *ptr, int size)
 {
     int	i;
 
