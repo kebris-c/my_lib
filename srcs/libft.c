@@ -6,7 +6,7 @@
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 11:36:01 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/07 17:22:08 by kebris-c         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:39:46 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int ft_atoi(char *str)
             sign = -sign;
         i++;
     }
-    while (str[i] >= 0 && str[i] <= 9 && str[i])
+    while (str[i] >= '0' && str[i] <= '9' && str[i])
     {
         re = re * 10 + (str[i] - '0');
         i++;
@@ -287,7 +287,7 @@ void    ft_rev_int_tab(int *tab, int size)
 
     i = 0;
     k = size - 1;
-    while (i < size)
+    while (i < k)
     {
         ft_swap(&tab[i], &tab[k]);
         i++;
@@ -297,21 +297,21 @@ void    ft_rev_int_tab(int *tab, int size)
 
 void    ft_sort_int_tab(int *tab, int size)
 {
-    int i;
-    int k;
+    	int i;
+    	int k;
 
-    i = 0;
-    while (tab[i] && k < size)
-    {
-        k = i + 1;
-        while (tab[k])
-        {
-            if (tab[i] > tab[k])
-                ft_swap(&tab[i], &tab[k]);
-            k++;
-        }
-        i++;
-    }
+    	i = 0;
+	while (i < size)
+	{
+		k = i + 1;
+        	while (tab[k])
+        	{
+            		if (tab[i] > tab[k])
+                		ft_swap(&tab[i], &tab[k]);
+            		k++;
+        	}
+        	i++;
+    	}
 }
 
 char    *ft_strcpy(char *dest, char *src)
@@ -328,23 +328,24 @@ char    *ft_strcpy(char *dest, char *src)
     return (dest);
 }
 
-char    *ft_strncpy(char *dest, char *src, int n)
+char	*ft_strncpy(char *dest, char *src, int n)
 {
-    int	i;
+	int	i;
 
-    i = 0;
-    while (src[i] && i < n)
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = 0;
-    return (dest);
+	i = 0;
+	while (src[i] && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+		dest[i++] = 0;
+	return (dest);
 }
 
-int ft_str_is_alpha(char *str)
+int	ft_str_is_alpha(char *str)
 {
-    int i;
+    int	i;
     int str_len;
 
     str_len = ft_strlen(str);
@@ -587,7 +588,7 @@ void    *ft_print_memory(void *addr, int size)
             line_size = size - i;
         ft_print_addr((unsigned long)(ptr + i), base);
         ft_print_memory_content((unsigned char *)ptr, line_size, base);
-        ft_print_ascii(ptr + 1, line_size);
+        ft_print_ascii(ptr + i, line_size);
         ft_putchar('\n');
         i += 16;
     }
@@ -809,7 +810,7 @@ int ft_find_next_prime(int nb)
         return (2);
     while (!ft_is_prime(nb))
         nb++;
-    return (0);
+    return (nb);
 }
 
 t_bool     ft_safe_cell(int *board, int col, int row)

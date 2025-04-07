@@ -3,7 +3,6 @@
 
 typedef int t_bool;
 
-#define int t_bool
 #define TRUE 1
 #define FALSE 0
 #define EVEN(n) ((n) % 2 == 0)

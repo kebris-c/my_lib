@@ -6,7 +6,7 @@
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:28:14 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/07 16:33:13 by kebris-c         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:37:10 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void    *ft_print_memory(void *addr, int size)
             line_size = size - i;
         ft_print_addr((unsigned long)(ptr + i), base);
         ft_print_memory_content(ptr + i, line_size, base);
-        ft_print_ascii(ptr + 1, line_size);
+        ft_print_ascii(ptr + i, line_size);
         ft_putchar('\n');
         i += 16;
     }
