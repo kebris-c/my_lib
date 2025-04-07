@@ -6,31 +6,13 @@
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:28:14 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/06 16:29:47 by kebris-c         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:33:13 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libt.h"
+#include "libft.h"
 
-static void    ft_putstr_non_printable(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] > 31 && str[i] < 127)
-            ft_putchar(str[i]);
-        else
-        {
-            ft_putchar('\\');
-            ft_putnbr_base((str[i] - '0'), "0123456789abcdef");
-        }
-        i++;
-    }
-}
-
-static void    ft_print_addr(unsigned long addr, char *base)
+void    ft_print_addr(unsigned long addr, char *base)
 {
     char    *hex;
     char    hex_addr[17];
@@ -48,9 +30,9 @@ static void    ft_print_addr(unsigned long addr, char *base)
     ft_putstr(": ");
 }
 
-static void    ft_print_memory_content(unsigned char *ptr, unsigned int size, char *base)
+void    ft_print_memory_content(unsigned char *ptr, int size, char *base)
 {
-    unsigned int    i;
+    int	i;
 
     i = 0;
     while (i < 16)
@@ -67,9 +49,9 @@ static void    ft_print_memory_content(unsigned char *ptr, unsigned int size, ch
     }
 }
 
-static void    ft_print_ascii(unsigned char *ptr, unsigned int size)
+void    ft_print_ascii(unsigned char *ptr, int size)
 {
-    unsigned int    i;
+    int	i;
 
     i = 0;
     while (i < size)
@@ -82,12 +64,12 @@ static void    ft_print_ascii(unsigned char *ptr, unsigned int size)
     }
 }
 
-void    *ft_print_memory(void *addr, unsigned int size)
+void    *ft_print_memory(void *addr, int size)
 {
-    unsigned int    i;
-    unsigned int    line_size;
-    unsigned char   *ptr;
-    char            *base;
+    int			i;
+    int    		line_size;
+    unsigned char	*ptr;
+    char		*base;
 
     i = 0;
     ptr = (unsigned char *)addr;

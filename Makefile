@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/06 16:17:55 by kebris-c          #+#    #+#              #
-#    Updated: 2025/04/06 16:17:57 by kebris-c         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 PROJECT = project
@@ -20,10 +8,10 @@ SHARED_LIB = $(NAME).so
 LIB_DIR = $(HOME)/.local/srcs/
 CREATOR_SCRIPT = libft_creator.sh
 CREATOR_FLAG = .creator_done
-NORMINETTE = norminette -CheckForbiddenSourceHeader
+NORMINETTE = norminette
 FTS = *.c
 
-all: $(NAME) $(PROJECT)
+all: $(NAME) ask_to_compile
 
 $(NAME): help_hint check_library
 
@@ -36,6 +24,7 @@ check_library:
 	@if [ ! -f $(CREATOR_FLAG) ]; then \
 		if [ ! -f $(LIB_DIR)$(STATIC_LIB) ] && [ ! -f $(LIB_DIR)$(SHARED_LIB) ]; then \
 			echo "No library found. Running $(CREATOR_SCRIPT)..."; \
+			sed -i 's/\r$//' libft_creator.sh; \
 			bash $(CREATOR_SCRIPT) && touch $(CREATOR_FLAG); \
 		else \
 			echo "Libraries exist. Marking creator as done."; \
@@ -49,8 +38,21 @@ check_library:
 		if [ -f $(LIB_DIR)$(SHARED_LIB) ]; then \
 			echo "Shared library $(SHARED_LIB) exists at $(LIB_DIR)"; \
 		fi; \
-	fi
+	fi;
 	@echo "Library check complete.";
+
+ask_to_compile:
+	@echo "Do you want to compile any project.c on the current directory? (y/n)"; \
+	read answer; \
+	answer=$$(echo $$answer | tr -d '[:space:]'); \
+	if [ "$$answer" = "y" ]; then \
+		$(MAKE) --no-print-directory $(PROJECT); \
+	elif [ "$$answer" = "n" ]; then \
+		echo "⏭️  Skipping compilation."; \
+	else \
+		printf "❌ Invalid answer: '$$answer'. I will ask again.\n"; \
+		$(MAKE) --no-print-directory ask_to_compile; \
+	fi;
 
 $(PROJECT):
 	@echo "Compiling project..."
