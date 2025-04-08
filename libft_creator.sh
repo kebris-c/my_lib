@@ -3,7 +3,7 @@
 LIB_NAME="libft"
 HEADER_DIR="$HOME/.local/includes/"
 LIB_DIR="$HOME/.local/srcs/"
-LOCAL_LIB="$HOME/Desktop/libs/srcs/$LIB_NAME.c"
+LOCAL_LIB="$HOME/Desktop/libs/srcs/*.c"
 LOCAL_HEADER="$HOME/Desktop/libs/includes/*.h"
 CFLAGS="-c -Wall -Werror -Wextra -g3 -fsanitize=address"
 CC="gcc"
