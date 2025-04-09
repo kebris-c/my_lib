@@ -20,11 +20,11 @@ static void    ft_print_combn_aux(char *nb)
     while (i < 10)
     {
         nb[i] = i + '0';
-        ft_putchar(nb[i]);
+        ft_putchar(nb[i], 1);
         if (i + 1 != 10)
-            ft_putstr(", ");
+            ft_putstr(", ", 1);
         else if (i + 1 == 10)
-            ft_putchar('\n');
+            ft_putchar('\n', 1);
         i++;
     }
     nb[i] = 0;
@@ -38,11 +38,11 @@ static void    ft_print_combn_aux2(char *nb)
     while (i < n && nb[i] && i > 0 && i < 10)
     {
         nb[i] = nb[i - 1] + 1;
-        ft_putstr(nb);
+        ft_putstr(nb, 1);
         if (i + 1 != 10)
-            ft_putstr(", ");
+            ft_putstr(", ", 1);
         else if (i + 1 == 10)
-            ft_putchar("\n");
+            ft_putchar('\n', 1);
         i++;
     }
 }

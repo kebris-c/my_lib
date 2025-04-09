@@ -6,7 +6,7 @@
 /*   By: kebris-c <kebris-c@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:28:14 by kebris-c          #+#    #+#             */
-/*   Updated: 2025/04/07 20:37:10 by kebris-c         ###   ########.fr       */
+/*   Updated: 2025/04/08 19:24:37 by kebris-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void    ft_print_addr(unsigned long addr, char *base)
         hex_addr[i--] = hex[addr % 16];
         addr /= 16;
     }
-    ft_putstr(hex_addr);
-    ft_putstr(": ");
+    ft_putstr(hex_addr, 1);
+    ft_putstr(": ", 1);
 }
 
 static void    ft_print_memory_content(unsigned char *ptr, int size, char *base)
@@ -41,10 +41,10 @@ static void    ft_print_memory_content(unsigned char *ptr, int size, char *base)
         {
             ft_putnbr_base(ptr[i], base);
             if (i % 2)
-                ft_putchar(' ');
+                ft_putchar(' ', 1);
         }
         else
-            ft_putstr("  ");
+            ft_putstr("  ", 1);
         i++;
     }
 }
@@ -57,9 +57,9 @@ static void    ft_print_ascii(unsigned char *ptr, int size)
     while (i < size)
     {
         if (ptr[i] >= 32 && ptr[i] <= 126)
-            ft_putchar(ptr[i]);
+            ft_putchar(ptr[i], 1);
         else
-            ft_putchar('.');
+            ft_putchar('.', 1);
         i++;
     }
 }
@@ -83,7 +83,7 @@ void    *ft_print_memory(void *addr, int size)
         ft_print_addr((unsigned long)(ptr + i), base);
         ft_print_memory_content(ptr + i, line_size, base);
         ft_print_ascii(ptr + i, line_size);
-        ft_putchar('\n');
+        ft_putchar('\n', 1);
         i += 16;
     }
     return (addr);
